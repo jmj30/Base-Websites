@@ -1,8 +1,11 @@
-from quart import Quart
-from Utils import Load_env
+from quart import Quart, render_template
+from Utils import Load_SC
 from main import ENV
 
 app = Quart(__name__, static_folder="./Static", template_folder="./Templates")
+app.secret_key = Load_SC(ENV)
 
-Load_env(ENV, "render")
 
+@app.get('/')
+async def Home():
+    return render_template('Home.html')

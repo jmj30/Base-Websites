@@ -66,6 +66,17 @@ def Load_env(path:Path | str, data:str):
     if type(path) is str: path = Path(path)
     e = load_dotenv(path)
     if path.is_file():
-        print(e)
-        return environ[data]
-    #else: raise FileNotFoundError(f'"{path}" Is Not a File')
+        try: return environ[data]
+        except KeyError: raise EnvException(f'Env Missing "{data}"')
+    else: raise FileNotFoundError(f'"{path}" Is Not a File')
+
+def Load_SC(path:Path):
+    try: Load_env(path, "SECRET_KEY")
+    except EnvException or FileNotFoundError:
+        try: open(path, 'x').close()
+        except FileExistsError: pass
+        with open(path, 'rt+') as l:
+            if l.read().strip() == "":
+                import secrets
+                l.write(f'SECRET_KEY="{secrets.token_urlsafe(16)}"')
+        exit()
