@@ -1,6 +1,6 @@
 import uvicorn
 import asyncio
-from Utils import Load_data, TomlException, Load_env
+from Utils import Load_data, TomlException
 
 TOML = './Config.toml'
 ENV = './.env'
@@ -24,8 +24,8 @@ async def Start_Webserver():
     """Starts the webserver"""
     if PROXY:
         if FAI == []: raise TomlException('"forwarded_allow_ips" Required')
-        config = uvicorn.Config("Webserver:app", IP, PORT, proxy_headers=True, forwarded_allow_ips=FAI)
-    else: config = uvicorn.Config("Webserver:app", IP, PORT)
+        config = uvicorn.Config("Webserver:app", IP, PORT, proxy_headers=True, forwarded_allow_ips=FAI, reload=DEBUG)
+    else: config = uvicorn.Config("Webserver:app", IP, PORT, reload=DEBUG)
     server = uvicorn.Server(config)
     await server.serve()
 
