@@ -17,6 +17,8 @@ except TomlException or FileNotFoundError: PROXY = False
 # Forwarded allow ips
 try: FAI = Load_data(TOML, ["Webserver", "forwarded_allow_ips"])
 except TomlException or FileNotFoundError: FAI = []
+try: DEBUG = Load_data(TOML, ["Webserver", "debug"])
+except TomlException or FileNotFoundError: DEBUG = False
 
 async def Start_Webserver():
     """Starts the webserver"""
