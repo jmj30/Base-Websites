@@ -63,15 +63,36 @@ class EnvException(Exception):
         super().__init__(message)
 
 def Load_env(path:Path | str, data:str):
+    """Loads the Env file
+
+    Args:
+        path (Path | str): Path of the env file
+        data (str): String of the value to get
+
+    Raises:
+        EnvException: When data could not be found
+        FileNotFoundError: When missing the env file
+
+    Returns:
+        str: return str
+    """
     if type(path) is str: path = Path(path)
-    e = load_dotenv(path)
+    load_dotenv(path)
     if path.is_file():
         try: return environ[data]
         except KeyError: raise EnvException(f'Env Missing "{data}"')
     else: raise FileNotFoundError(f'"{path}" Is Not a File')
 
 def Load_SC(path:Path):
-    try: Load_env(path, "SECRET_KEY")
+    """Loads Secret Key
+
+    Args:
+        path (Path): Path of the env file
+
+    Returns:
+        str: Secret Key
+    """
+    try: return str(Load_env(path, "SECRET_KEY"))
     except EnvException or FileNotFoundError:
         try: open(path, 'x').close()
         except FileExistsError: pass
