@@ -1,24 +1,22 @@
 import uvicorn
 import asyncio
-from Utils import Load_data, TomlException
+from Utils import Load_defaults, TomlException
 
 TOML = './Config.toml'
 ENV = './.env'
 
+Defaults = {"ip": "127.0.0.1", "port": 8092, "reverse_proxy": False, "forwarded_allow_ips": [], "debug": False}
+
 # Try to load ip address from toml file 
-try: IP = Load_data(TOML, ["Webserver", "ip"])
-except TomlException or FileNotFoundError: IP = "127.0.0.1"
+IP = Load_defaults(TOML, ["Webserver", "ip"], Defaults)
 # Try to load port from toml file
-try: PORT = Load_data(TOML, ["Webserver", "port"])
-except TomlException or FileNotFoundError: PORT = 8092
+PORT = Load_defaults(TOML, ["Webserver", "port"], Defaults)
 # Reverse proxy support
-try: PROXY = Load_data(TOML, ["Webserver", "reverse_proxy"])
-except TomlException or FileNotFoundError: PROXY = False
+PROXY = Load_defaults(TOML, ["Webserver", "reverse_proxy"], Defaults)
 # Forwarded allow ips
-try: FAI = Load_data(TOML, ["Webserver", "forwarded_allow_ips"])
-except TomlException or FileNotFoundError: FAI = []
-try: DEBUG = Load_data(TOML, ["Webserver", "debug"])
-except TomlException or FileNotFoundError: DEBUG = False
+FAI = Load_defaults(TOML, ["Webserver", "forwarded_allow_ips"], Defaults)
+# Debug mode
+DEBUG = Load_defaults(TOML, ["Webserver", "debug"], Defaults)
 
 async def Start_Webserver():
     """Starts the webserver"""

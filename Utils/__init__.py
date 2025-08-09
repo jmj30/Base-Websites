@@ -101,3 +101,7 @@ def Load_SC(path:Path):
                 import secrets
                 l.write(f'SECRET_KEY="{secrets.token_urlsafe(16)}"')
         exit()
+
+def Load_defaults(path:Path, data:list, Dict:dict):
+    try: return Load_data(path, data)
+    except TomlException or FileNotFoundError: return Dict[data[1]]
