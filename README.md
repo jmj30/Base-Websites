@@ -19,4 +19,4 @@ Docker:
 `docker build -t Site .`
 
 Docker compose:
-`docker compose up`
+`docker compose up -d && docker compose logs -f`
