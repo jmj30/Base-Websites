@@ -2,21 +2,26 @@
 
 Main repo: [Gitlab](https://gitlab.jmj30yt.xyz/jmj30/)
 
-Uses [UV](https://github.com/astral-sh/uv)
+Made with caffine, love and [Python](https://www.python.org/)
 
 ## How to use
 
 Open terminal and run (one of them):
 
-UV (Default way):
+[UV](https://github.com/astral-sh/uv) (Default way):
 `uv run main.py`
 
-Reg Python:
+Python:
 `python -m venv .venv`
-`python -m pip install interactions-py dotenv`
+`python -m pip -r requirements.txt`
 
-Docker:
+[Docker](https://www.docker.com/):
 `docker build -t Site .`
 
 Docker compose:
 `docker compose up -d && docker compose logs -f`
+
+
+Nix/Nixos [devenv](https://devenv.sh/):
+`devenv shell`
+`uv run main.py`

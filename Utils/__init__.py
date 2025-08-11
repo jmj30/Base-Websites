@@ -51,6 +51,9 @@ def Load_data(path:Path, data:list) -> any:
     try: return Lt[data[1]]
     except KeyError: raise TomlException(f'Toml Missing "{data}"')
 
+def Load_defaults(path:Path, data:list, Dict:dict):
+    try: return Load_data(path, data)
+    except (TomlException, FileNotFoundError): return Dict[data[1]]
 
 # Env
 class EnvException(Exception):
@@ -93,7 +96,7 @@ def Load_SC(path:Path):
         str: Secret Key
     """
     try: return str(Load_env(path, "SECRET_KEY"))
-    except EnvException or FileNotFoundError:
+    except (EnvException, FileNotFoundError):
         try: open(path, 'x').close()
         except FileExistsError: pass
         with open(path, 'rt+') as l:
@@ -101,7 +104,3 @@ def Load_SC(path:Path):
                 import secrets
                 l.write(f'SECRET_KEY="{secrets.token_urlsafe(16)}"')
         exit()
-
-def Load_defaults(path:Path, data:list, Dict:dict):
-    try: return Load_data(path, data)
-    except TomlException or FileNotFoundError: return Dict[data[1]]
