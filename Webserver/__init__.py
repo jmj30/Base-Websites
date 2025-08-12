@@ -14,5 +14,5 @@ if LOGENABLED:
 @app.get('/')
 async def Home():
     ip = request.remote_addr
-    if LOGFILE: logger.info(f'{request.url_rule} | {ip}')
+    if LOGFILE: logger.info(f'"{request.url_rule}" | {ip}')
     return await render_template('Home.html')
