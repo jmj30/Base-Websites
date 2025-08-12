@@ -15,4 +15,4 @@ if LOGENABLED:
 async def Home():
     ip = request.remote_addr
     if LOGFILE: logger.info(f'"{request.url_rule}" | {ip}')
-    return await render_template('Home.html')
+    return await render_template('Home_Page.html')
