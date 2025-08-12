@@ -1,3 +1,6 @@
+# Log files
+*.log
+
 # Devenv files
 .devenv
 .devenv.flake.nix
@@ -6,6 +9,7 @@
 # Main files
 .python-version
 .env
+Tests.py
 
 # Webserver Stuff
 Config.toml

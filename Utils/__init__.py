@@ -47,7 +47,10 @@ def Load_data(path:Path, data:list) -> any:
     Returns:
         any: any type of object
     """
-    Lt = Load_toml(path)[data[0]]
+    if str(data[0]).__contains__('.'):
+        l = str(data[0]).split('.')
+        Lt = Load_toml(path)[l[0]][l[1]]
+    else: Lt = Load_toml(path)[data[0]]
     try: return Lt[data[1]]
     except KeyError: raise TomlException(f'Toml Missing "{data}"')
 
