@@ -21,6 +21,8 @@ DEBUG = Load_defaults(TOML, ["Webserver", "debug"], Defaults)
 # Logging
 LOGENABLED = Load_defaults(TOML, ["Webserver.logging", "enabled"], Logging_defaults)
 if LOGENABLED: LOGFILE = Load_data(TOML, ["Webserver.logging", "file"])
+else: LOGFILE = None
+
 
 async def Start_Webserver():
     """Starts the webserver"""
