@@ -1,27 +1,9 @@
-# Base Site
+# Base Websites
 
-Main repo: [Gitlab](https://gitlab.jmj30yt.xyz/jmj30/)
+[Gitlab](https://gitlab.jmj30yt.xyz/jmj30/Base_Website)
 
-Made with caffine, love and [Python](https://www.python.org/)
+[License](./LICENSE)
 
-## How to use
+## Project Structural
 
-Open terminal and run (one of them):
-
-[UV](https://github.com/astral-sh/uv) (Default way):
-`uv run main.py`
-
-Python:
-`python -m venv .venv`
-`python -m pip -r requirements.txt`
-
-[Docker](https://www.docker.com/):
-`docker build -t Site .`
-
-Docker compose:
-`docker compose up -d && docker compose logs -f`
-
-
-Nix/Nixos [devenv](https://devenv.sh/):
-`devenv shell`
-`uv run main.py`
+<pre>Utils/<br>  > <a href="https://gitlab.jmj30yt.xyz/jmj30/jmj30s-utils/-/blob/main/Utils/__init__.py?ref_type=heads">__init__.py</a><br>  > <a href="https://gitlab.jmj30yt.xyz/jmj30/jmj30s-utils/-/blob/main/Utils/WS.py?ref_type=heads">WS.py</a><br></pre>
